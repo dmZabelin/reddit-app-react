@@ -1,0 +1,31 @@
+@import "~scss/var.scss";
+
+.menuItem {
+  padding: 10px 20px;
+  color: $grey99;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: color .3s ease;
+  &:not(:last-child) {
+    border-bottom: 1px solid $greyEC;
+  }
+  svg {
+    margin-right: 5px;
+    path {
+      transition: fill .3s ease;
+    }
+  }
+  &:hover {
+    color: $orange;
+    svg {
+      path {
+        fill: $orange;
+      }
+    }
+  }
+  @media all and (min-width: 1024px)  {
+    padding: 10px 0;
+  }
+}
+

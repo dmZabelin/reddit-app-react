@@ -1,0 +1,14 @@
+@import '~scss/var.scss';
+
+.menuButton {
+  padding: 12px 0;
+  width: 100%;
+  text-align: center;
+  background-color: $greyD9;
+  color: $grey66;
+}
+@media all and (min-width: 1024px) {
+  .menuButton {
+    display: none;
+  }
+}

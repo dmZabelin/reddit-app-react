@@ -1,0 +1,21 @@
+@import '~scss/var.scss';
+
+.menuList {
+	display: none;
+}
+
+.closeButton {
+  background-color: $greyD9;
+  padding: 12px 23px;
+  border-radius: 0 0 3px 3px;
+  width: 100%;
+}
+
+@media all and (min-width: 768px) {
+  .menuMobile {
+    display: none;
+  }
+  .menuList {
+    display: block;
+  }
+}

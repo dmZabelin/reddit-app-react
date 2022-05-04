@@ -14,17 +14,17 @@ const setupDevtool = () => {
 const GLOBAL_STYLES = /\.global\.scss$/;
 
 module.exports = {
-	resolve: {
-		extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-		alias: {
-			scss: path.join(__dirname, './src/scss'),
-		},
-	},
 	mode: NODE_ENV ? NODE_ENV : 'development',
 	entry: path.resolve(__dirname, 'src/App.tsx'),
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'index.bundle.js',
+	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+		alias: {
+			scss: path.resolve(__dirname, './src/scss'),
+		},
 	},
 	module: {
 		rules: [
@@ -68,7 +68,7 @@ module.exports = {
 		}),
 	],
 	devServer: {
-		port: 3000,
+		port: 5000,
 		open: true,
 		hot: IS_DEV,
 	},
