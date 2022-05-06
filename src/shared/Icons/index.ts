@@ -1,1 +1,2 @@
-export * from './Icons';
+export * from './UserIcon';
+export * from './MenuIcon';

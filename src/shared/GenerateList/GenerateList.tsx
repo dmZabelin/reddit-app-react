@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './generateList.scss';
 import { noop } from '../../utils/js/noop';
-import { Icon } from '../Icons';
-import { IIcon } from '../Icons';
+import { Icon } from '../Content/CardList/Card/Menu/itemIcons';
+import { IIcon } from '../Content/CardList/Card/Menu/itemIcons';
 
 interface IItem {
 	id: string;
