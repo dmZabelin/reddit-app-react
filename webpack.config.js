@@ -26,7 +26,7 @@ const COMMON_PLUGINS = [
 
 module.exports = {
 	mode: NODE_ENV ? NODE_ENV : 'development',
-	entry: path.resolve(__dirname, 'src/App.tsx'),
+	entry: path.resolve(__dirname, 'src/Index.tsx'),
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].bundle.js',
@@ -36,6 +36,7 @@ module.exports = {
 		extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
 		alias: {
 			scss: path.resolve(__dirname, './src/scss'),
+			src: path.join(__dirname, './src'),
 		},
 	},
 	module: {
@@ -70,6 +71,10 @@ module.exports = {
 					},
 					'sass-loader',
 				],
+			},
+			{
+				test: /\.(png|jpg|jpeg|gif)$/i,
+				type: 'asset/resource',
 			},
 		],
 	},

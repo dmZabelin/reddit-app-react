@@ -1,29 +1,55 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './textcontent.scss';
+import axios from 'axios';
+import { tokenContext } from '../../../../context/tokenContext';
+import smile from 'src/assets/img/smile.png';
 
-export function TextContent() {
+interface ITextContentProps {
+	title: string;
+	author: string;
+	created: string;
+}
+
+const getAuthorImg = async (username: string, token: string): Promise<any> => {
+	return axios
+		.get(`https://oauth.reddit.com/user/${username}/about.json`, {
+			headers: { Authorization: `Bearer ${token}` },
+		})
+		.then((resp) => {
+			return resp.data.data.snoovatar_img;
+		});
+};
+
+export function TextContent(props: ITextContentProps) {
+	const token = useContext(tokenContext);
+	const [authorImg, setAuthorImg] = useState('');
+
+	useEffect(() => {
+		getAuthorImg(props.author, token).then((res) => {
+			setAuthorImg(res);
+		});
+	}, []);
 	return (
 		<div className={styles.textContent}>
 			<div className={styles.metaData}>
 				<div className={styles.userLink}>
 					<img
 						className={styles.avatar}
-						src="https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=466&q=8"
+						src={authorImg.length > 0 ? authorImg : smile}
 						alt="avatar"
 					/>
-					<a href="#user-url" className={styles.username}>
-						Дмитрий Гришин
+					<a href="#user-url" className={styles.username} target="_blank">
+						{props.author}
 					</a>
 				</div>
 				<span className={styles.createdAt}>
-					<span className={styles.publishedLabel}>опубликовано </span>4
-					часа назад
+					<span className={styles.publishedLabel}>опубликовано </span>
+					{props.created}
 				</span>
 			</div>
 			<h2 className={styles.title}>
-				<a href="#post-url" className={styles.postLink}>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Consequatur illo illum.
+				<a href="#post-url" className={styles.postLink} target="_blank">
+					{props.title}
 				</a>
 			</h2>
 		</div>
