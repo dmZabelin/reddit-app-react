@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './textcontent.scss';
 import axios from 'axios';
-import { tokenContext } from '../../../../context/tokenContext';
 import smile from 'src/assets/img/smile.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store/rootReducer';
 
 interface ITextContentProps {
 	title: string;
@@ -21,7 +22,7 @@ const getAuthorImg = async (username: string, token: string): Promise<any> => {
 };
 
 export function TextContent(props: ITextContentProps) {
-	const token = useContext(tokenContext);
+	const token = useSelector<RootState, string>((state) => state.token.token);
 	const [authorImg, setAuthorImg] = useState('');
 
 	useEffect(() => {

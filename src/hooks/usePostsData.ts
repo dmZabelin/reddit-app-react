@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { tokenContext } from '../shared/context/tokenContext';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getTimeAgo } from '../utils/js/getTimeAgo';
+import { useSelector } from 'react-redux';
+import { RootState } from '../shared/store/rootReducer';
 
 interface IObj {
 	data: {
@@ -20,7 +21,7 @@ interface IUsePostsData {
 
 export function usePostsData() {
 	const [postsData, setPostsData] = useState<Array<IUsePostsData>>([]);
-	const token = useContext(tokenContext);
+	const token = useSelector<RootState, string>((state) => state.token.token);
 	useEffect(() => {
 		if (token && token.length > 0) {
 			axios

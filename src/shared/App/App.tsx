@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from '../Layout';
 import { Header } from '../Header';
 import { Content } from '../Content';
-import { useToken } from '../../hooks/useToken';
-import { tokenContext } from '../context/tokenContext';
 import { UserContextProvider } from '../context/userContext';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../store/reducers/tokenSlice';
 
 export function App() {
-	const [token] = useToken();
+	const dispatch = useDispatch();
+	useEffect(() => {
+		const url = new URL(window.location.href);
+		const token = url.hash.split('&')[0].split('=')[1];
+		if (token) {
+			dispatch(setToken(token));
+		}
+	}, []);
 	return (
-		<tokenContext.Provider value={token}>
-			<UserContextProvider>
-				<Layout>
-					<Header />
-					<Content />
-				</Layout>
-			</UserContextProvider>
-		</tokenContext.Provider>
+		<UserContextProvider>
+			<Layout>
+				<Header />
+				<Content />
+			</Layout>
+		</UserContextProvider>
 	);
 }
